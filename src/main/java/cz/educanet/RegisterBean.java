@@ -2,7 +2,6 @@ package cz.educanet;
 
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
-import org.apache.commons.codec.digest.DigestUtils;
 
 import java.io.Serializable;
 import java.sql.SQLException;
