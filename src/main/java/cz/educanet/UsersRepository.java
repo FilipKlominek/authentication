@@ -41,8 +41,8 @@ public class UsersRepository implements Serializable {
     }
 
     public void addUser(String name, String email, String unHashedPassword) throws SQLException {
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/users?user=root&password=");
 
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/users?user=root&password=");
 
 
         User user = new User(name, email, unHashedPassword); //password gets hashed in constructor
