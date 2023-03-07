@@ -20,7 +20,7 @@ public class UsersRepository implements Serializable {
 
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "SELECT u.userId, u.fullName, u.email, u.hashedPassword, u.createdAt, u.updatedAt" +
-                        " FROM users.user AS u"
+                        " FROM user AS u"
         );
         ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -44,17 +44,20 @@ public class UsersRepository implements Serializable {
 
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/users?user=root&password=");
 
-
         User user = new User(name, email, unHashedPassword); //password gets hashed in constructor
 
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "INSERT INTO users.user (fulName, Email, hashedPassword)" +
-                        "VALUES (?, ?, ?)"
+                "INSERT INTO users.user (fullName, Email, hashedPassword, createdAt, updatedAt)" +
+                        "VALUES (?, ?, ?, ?, ?)"
         );
 
         preparedStatement.setString(1, user.getName());
         preparedStatement.setString(2, user.getEmail());
         preparedStatement.setString(3, user.getHashedPassword());
+        preparedStatement.setString(4, user.getCreatedAt().toString());
+        preparedStatement.setString(5, user.getUpdatedAt().toString());
+
+        preparedStatement.execute();
 
         connection.close();
     }

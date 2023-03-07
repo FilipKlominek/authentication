@@ -50,9 +50,17 @@ public class RegisterBean implements Serializable {
 
     public boolean register() throws SQLException {
 
+        if (this.name.equals("") || this.email.equals("") || this.unHashedPassword.equals("") || this.confirmUnHashedPassword.equals(""))
+            return false;
+
         if (!this.unHashedPassword.equals(this.confirmUnHashedPassword)) return false;
 
         usersRepository.addUser(this.name, this.email, this.unHashedPassword);
+
+        this.name = "";
+        this.email = "";
+        this.unHashedPassword = "";
+        this.confirmUnHashedPassword = "";
 
         return true;
     }
