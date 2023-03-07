@@ -6,7 +6,7 @@ import jakarta.inject.Named;
 
 import java.io.Serializable;
 import java.sql.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +19,8 @@ public class UsersRepository implements Serializable {
         ArrayList<User> users = new ArrayList<>();
 
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT u.userId, u.fullName, u.email, u.hashedPassword, u.createdAt, u.updatedAt" +
-                        " FROM user AS u"
+                "SELECT u.userId, u.fullName, u.email, u.hashedPassword" +
+                        " FROM users.user AS u"
         );
         ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -29,9 +29,7 @@ public class UsersRepository implements Serializable {
                     resultSet.getInt(1),
                     resultSet.getString(2),
                     resultSet.getString(3),
-                    resultSet.getString(4),
-                    LocalDate.parse(resultSet.getString(5)),
-                    LocalDate.parse(resultSet.getString(6))
+                    resultSet.getString(4)
             ));
         }
 

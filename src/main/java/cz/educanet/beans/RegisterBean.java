@@ -1,5 +1,6 @@
-package cz.educanet;
+package cz.educanet.beans;
 
+import cz.educanet.UsersRepository;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 

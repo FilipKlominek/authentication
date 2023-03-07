@@ -2,31 +2,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core">
-<h:body>
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
-    <h1>Create new account</h1>
-    <h:form>
-        <div>
-            <h:outputLabel>Username</h:outputLabel>
-            <h:inputText type="username" value="#{registerBean.name}" label="Username"/>
-        </div>
-        <div>
-            <h:outputLabel>Email</h:outputLabel>
-            <h:inputText type="email" value="#{registerBean.email}" label="Email"/>
-        </div>
-        <div>
-            <h:outputLabel>Password</h:outputLabel>
-            <h:inputText type="password" value="#{registerBean.unHashedPassword}" label="Password"/>
-        </div>
-        <div>
-            <h:outputLabel>Confirm password</h:outputLabel>
-            <h:inputText type="password" value="#{registerBean.confirm}" label="Confirm password"/>
-        </div>
-        <div>
-            <h:commandButton type="submit" onclick="#{registerBean.register()}" value="Register"/>
-        </div>
-    </h:form>
+<h:body>
+    <h:body>
+        <a href="secret.xhtml">Secret page</a>
+        <h1>Login</h1>
+        <h:form>
+            <div>
+                <h:outputLabel>Username</h:outputLabel>
+                <h:inputText type="username" value="#{loginBean.name}" label="Username"/>
+            </div>
+            <div>
+                <h:outputLabel>Email</h:outputLabel>
+                <h:inputText type="email" value="#{loginBean.email}" label="Email"/>
+            </div>
+            <div>
+                <h:outputLabel>Password</h:outputLabel>
+                <h:inputText type="password" value="#{loginBean.unHashedPasswordTest}" label="Password"/>
+            </div>
+            <div>
+                <h:commandButton type="submit" onclick="#{loginBean.login()}" value="Login"/>
+            </div>
+
+            <a href="register.xhtml">Don't have an account? Register here!</a>
+        </h:form>
+    </h:body>
 </h:body>
 </html>

@@ -2,26 +2,35 @@ package cz.educanet;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class User {
     private final int id;
     private String name;
     private String email;
     private String hashedPassword;
-    private final LocalDate createdAt;
-    private LocalDate updatedAt;
+    private final LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public User(String name, String email, String unHashedPassword) {
         this.id = 0;
         this.name = name;
         this.email = email;
         this.hashedPassword = DigestUtils.sha256Hex(unHashedPassword);
-        this.createdAt = LocalDate.now();
+        this.createdAt = LocalDateTime.now();
         this.updatedAt = this.createdAt;
     }
 
-    public User(int id, String name, String email, String unHashedPassword, LocalDate createdAt, LocalDate updatedAt) {
+public User(int id, String name, String email, String hashedPassword) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.hashedPassword = hashedPassword;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = this.createdAt;
+    }
+
+    public User(int id, String name, String email, String unHashedPassword, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -34,7 +43,7 @@ public class User {
         this.name = newName;
         this.email = newEmail;
         this.hashedPassword = DigestUtils.sha256Hex(newUnHashedPassword);
-        this.updatedAt = LocalDate.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public int getId() {
@@ -53,11 +62,11 @@ public class User {
         return hashedPassword;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public LocalDate getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 }
