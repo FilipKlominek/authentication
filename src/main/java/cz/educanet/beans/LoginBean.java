@@ -14,7 +14,7 @@ import java.util.List;
 @SessionScoped
 public class LoginBean implements Serializable {
 
-    private boolean isLoggedIn = true;
+    private boolean isLoggedIn = false;
 
     private final UsersRepository usersRepository = new UsersRepository();
     private String name = "";
@@ -55,27 +55,36 @@ public class LoginBean implements Serializable {
 
     public boolean login() throws SQLException {
 
-        if (this.name.equals("") || this.email.equals("") || this.unHashedPasswordTest.equals(""))
-            return false;
+        if (this.name.equals("") || this.email.equals("") || this.unHashedPasswordTest.equals("")) return false;
 
         List<User> userList = usersRepository.getUsers();
 
-        User user = new User(this.name, this.email, this.unHashedPasswordTest);
-
         for (User u : userList) {
-            if (u.getName().equals(user.getName()) && u.getEmail().equals(user.getEmail()) && u.getHashedPassword().equals(user.getHashedPassword())) {
-                System.out.println("yes");
-                this.isLoggedIn = true;
-                return true;
+
+            System.out.println(u.getHashedPassword());
+            System.out.println(this.hash(this.unHashedPasswordTest + u.getSalt()));
+
+            if (u.getName().equals(this.name) && u.getEmail().equals(this.getEmail())) {
+                if (u.getHashedPassword().equals(this.hash(this.unHashedPasswordTest + u.getSalt()))) {
+                    this.isLoggedIn = true;
+                    return true;
+                }
             }
         }
 
-        System.out.println("65f1gbf6");
+
 
         return false;
     }
 
+    private String hash(String unHashedPassword) {
+        return DigestUtils.sha256Hex(unHashedPassword);
+    }
+
     public void logout() {
+        this.name = "";
+        this.email = "";
+        this.unHashedPasswordTest = "";
         this.isLoggedIn = false;
     }
 }
