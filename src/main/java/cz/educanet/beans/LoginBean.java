@@ -61,9 +61,6 @@ public class LoginBean implements Serializable {
 
         for (User u : userList) {
 
-            System.out.println(u.getHashedPassword());
-            System.out.println(this.hash(this.unHashedPasswordTest + u.getSalt()));
-
             if (u.getName().equals(this.name) && u.getEmail().equals(this.getEmail())) {
                 if (u.getHashedPassword().equals(this.hash(this.unHashedPasswordTest + u.getSalt()))) {
                     this.isLoggedIn = true;
